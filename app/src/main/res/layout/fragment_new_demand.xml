@@ -9,6 +9,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:layoutManager="LinearLayoutManager"
     tools:listitem="@layout/fragment_item"
-    >
+    tools:context="cav.listdemand.ui.fragments.NewDemandFragment">
 
 </android.support.v7.widget.RecyclerView>

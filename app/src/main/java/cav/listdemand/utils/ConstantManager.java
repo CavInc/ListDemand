@@ -5,4 +5,5 @@ package cav.listdemand.utils;
  */
 public interface ConstantManager {
     String TAG_PREFIX = "LISTDEMAND";
+    int GET_NEW_QUERY = 0;
 }

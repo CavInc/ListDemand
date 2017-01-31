@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity {
            // return PlaceholderFragment.newInstance(position + 1);
             switch (position){
                 case 0:
-                    return NewDemandFragment.newInstance("","");
+                    return NewDemandFragment.newInstance();
                 case 1:
                     return WorkDemandFragment.newInstance("","");
                 case 2:
