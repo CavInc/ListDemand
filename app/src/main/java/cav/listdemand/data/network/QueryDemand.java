@@ -18,16 +18,13 @@ import ru.profit_group.scorocode_sdk.scorocode_objects.Query;
  *
  */
 public class QueryDemand {
-    private static final String APPLICATION_ID = "9e1c8b8022964587af2f596b0228978e";
-    private static final java.lang.String CLIENT_KEY = "1e3c8c0846c54a909d8cda5ea28002b4";
-    private static final String FILE_KEY = "f310b2300e73406785c490e867c4a7ab";
-    private static final String MESSAGE_KEY = "77754e03c6c1473d834492972c9821a8";
-    private static final String SCRIPT_KEY = "26d15a96814f4e0b8fc1f82ec0e26a46";
 
     private List<DemandModel> mData = null;
 
     public QueryDemand(int mode,String userId){
-        ScorocodeSdk.initWith(APPLICATION_ID, CLIENT_KEY, null, FILE_KEY, MESSAGE_KEY, SCRIPT_KEY, null);
+        if (ScorocodeSdk.getSessionId()!=null){
+            Log.d(ConstantManager.TAG_PREFIX,ScorocodeSdk.getSessionId());
+        }
         Document document = new Document("demand");
         HashMap<String, Object> dm = document.getDocumentContent().getContent();
 
