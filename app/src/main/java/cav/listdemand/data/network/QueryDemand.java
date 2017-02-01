@@ -25,9 +25,6 @@ public class QueryDemand {
         if (ScorocodeSdk.getSessionId()!=null){
             Log.d(ConstantManager.TAG_PREFIX,ScorocodeSdk.getSessionId());
         }
-        Document document = new Document("demand");
-        HashMap<String, Object> dm = document.getDocumentContent().getContent();
-
         Query query = new Query("demand");
         query.findDocuments(new CallbackFindDocument(){
 
@@ -37,6 +34,11 @@ public class QueryDemand {
                     for (int i=0;i<documentInfos.size();i++){
                         Log.d(ConstantManager.TAG_PREFIX, (String) documentInfos.get(i).get("title"));
                         Log.d(ConstantManager.TAG_PREFIX, (String) documentInfos.get(i).get("body_doc"));
+                        mData.add(new DemandModel((String) documentInfos.get(i).getId(),
+                                (String) documentInfos.get(i).get("operator_id"),
+                                (String) documentInfos.get(i).get("title"),
+                                (String) documentInfos.get(i).get("body_doc"),
+                                (Boolean) documentInfos.get(i).get("close_demand")));
 
                     }
 
@@ -46,7 +48,6 @@ public class QueryDemand {
             @Override
             public void onDocumentNotFound(String errorCode, String errorMessage) {
                 Log.d(ConstantManager.TAG_PREFIX,errorCode+" "+errorMessage);
-
             }
         });
 
