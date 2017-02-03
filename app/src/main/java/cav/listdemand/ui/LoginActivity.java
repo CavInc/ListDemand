@@ -83,7 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 Log.d(TAG,"OK");
                 Log.d(TAG,responseLogin.getResult().getSessionId());
                 HashMap<String, Object> userContent = responseLogin.getResult().getUserInfo().getContent();
-                HashMap<String, Object> userFields = responseLogin.getResult().getUserInfo().getFields();
+               // HashMap<String, Object> userFields = responseLogin.getResult().getUserInfo().getFields();
                 DataManager dm = DataManager.getInstance();
                 dm.getPreferensManager().saveLoginedUser(userContent,responseLogin.getResult().getSessionId());
 

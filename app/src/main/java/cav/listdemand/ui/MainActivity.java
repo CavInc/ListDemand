@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cav.listdemand.R;
+import cav.listdemand.data.managers.DataManager;
 import cav.listdemand.ui.fragments.CloseDemandFragment;
 import cav.listdemand.ui.fragments.NewDemandFragment;
 import cav.listdemand.ui.fragments.WorkDemandFragment;
@@ -146,7 +147,7 @@ public class MainActivity extends BaseActivity {
                 case 0:
                     return NewDemandFragment.newInstance();
                 case 1:
-                    return WorkDemandFragment.newInstance("","");
+                    return WorkDemandFragment.newInstance(DataManager.getInstance().getPreferensManager().getUserID());
                 case 2:
                     return CloseDemandFragment.newInstance();
             }

@@ -6,4 +6,8 @@ package cav.listdemand.utils;
 public interface ConstantManager {
     String TAG_PREFIX = "LISTDEMAND";
     int GET_NEW_QUERY = 0;
+
+    String USER_LOGIN_ID = "USER_LOGIN_ID";
+    String USER_LOGIN_EMAIL = "USER_LOGIN_EMAIL";
+    String USER_LOGIN_NAME = "USER_LOGIN_NAME";
 }
