@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity {
                 case 1:
                     return WorkDemandFragment.newInstance("","");
                 case 2:
-                    return CloseDemandFragment.newInstance("","");
+                    return CloseDemandFragment.newInstance();
             }
             return null;
         }
