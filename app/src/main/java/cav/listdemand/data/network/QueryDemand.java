@@ -2,6 +2,7 @@ package cav.listdemand.data.network;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,17 +26,25 @@ public class QueryDemand {
         if (ScorocodeSdk.getSessionId()!=null){
             Log.d(ConstantManager.TAG_PREFIX,ScorocodeSdk.getSessionId());
         }
+
+
         Query query = new Query("demand");
         query.findDocuments(new CallbackFindDocument(){
 
             @Override
             public void onDocumentFound(List<DocumentInfo> documentInfos) {
                 if (documentInfos != null){
+                    mData = new ArrayList<DemandModel>();
+
                     for (int i=0;i<documentInfos.size();i++){
+                        Log.d(ConstantManager.TAG_PREFIX,(String) documentInfos.get(i).getId());
                         Log.d(ConstantManager.TAG_PREFIX, (String) documentInfos.get(i).get("title"));
                         Log.d(ConstantManager.TAG_PREFIX, (String) documentInfos.get(i).get("body_doc"));
+
+                        String operator_id = (String) documentInfos.get(i).get("operator_id")!=null ? (String) documentInfos.get(i).get("operator_id") : "";
+
                         mData.add(new DemandModel((String) documentInfos.get(i).getId(),
-                                (String) documentInfos.get(i).get("operator_id"),
+                                operator_id,
                                 (String) documentInfos.get(i).get("title"),
                                 (String) documentInfos.get(i).get("body_doc"),
                                 (Boolean) documentInfos.get(i).get("close_demand")));
@@ -55,6 +64,7 @@ public class QueryDemand {
     }
 
     public List<DemandModel> getData() {
+      //  Log.d(ConstantManager.TAG_PREFIX, String.valueOf(mData.size()));
         return mData;
     }
 }

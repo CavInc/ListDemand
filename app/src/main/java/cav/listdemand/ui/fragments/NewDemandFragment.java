@@ -4,6 +4,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ import java.util.List;
 import cav.listdemand.R;
 import cav.listdemand.data.network.QueryDemand;
 import cav.listdemand.data.storage.models.DemandModel;
+import cav.listdemand.ui.adapters.DemandAdapter;
 import cav.listdemand.utils.ConstantManager;
+import ru.profit_group.scorocode_sdk.ScorocodeSdk;
 
 
 public class NewDemandFragment extends Fragment {
 
 
+    private static final String TAG = "NEW_DEMAND";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -53,8 +57,18 @@ public class NewDemandFragment extends Fragment {
         //TODO потом переделать что бы не тягать кажжый раз из облака
         // получаем данные из облака
         mDemandData = new QueryDemand(ConstantManager.GET_NEW_QUERY,"").getData();
+        //Log.d(TAG, String.valueOf(mDemandData.size()));
+        DemandAdapter adapter = new DemandAdapter(mDemandData);
+
+        mRecyclerView.setAdapter(adapter);
 
         return rootView;
+    }
+
+    private void loadData(){
+        if (ScorocodeSdk.getSessionId()!=null){
+            Log.d(ConstantManager.TAG_PREFIX,ScorocodeSdk.getSessionId());
+        }
     }
 
 

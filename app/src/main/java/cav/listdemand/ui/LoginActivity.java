@@ -2,6 +2,7 @@ package cav.listdemand.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import cav.listdemand.R;
+import cav.listdemand.data.managers.DataManager;
 import ru.profit_group.scorocode_sdk.Callbacks.CallbackLoginUser;
 import ru.profit_group.scorocode_sdk.Responses.user.ResponseLogin;
 import ru.profit_group.scorocode_sdk.ScorocodeSdk;
@@ -47,6 +49,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
         ScorocodeSdk.initWith(APPLICATION_ID, CLIENT_KEY, null, FILE_KEY, MESSAGE_KEY, SCRIPT_KEY, null);
 
+        if (isLogined()){
+            startMaintActivity();
+        }
+
     }
 
     @Override
@@ -78,6 +84,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 Log.d(TAG,responseLogin.getResult().getSessionId());
                 HashMap<String, Object> userContent = responseLogin.getResult().getUserInfo().getContent();
                 HashMap<String, Object> userFields = responseLogin.getResult().getUserInfo().getFields();
+                DataManager dm = DataManager.getInstance();
+                dm.getPreferensManager().saveLoginedUser(userContent,responseLogin.getResult().getSessionId());
 
                 startMaintActivity();
             }
@@ -94,5 +102,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         //finish();
+    }
+
+    @NonNull
+    private Boolean isLogined(){
+        String sessionId = DataManager.getInstance().getPreferensManager().getSessionId();
+        if (sessionId!=null && ScorocodeSdk.getSessionId()!=null) {
+            return true;
+        }
+        return false;
     }
 }
