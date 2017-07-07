@@ -75,6 +75,7 @@ public class NewDemandFragment extends Fragment {
         }
 
         Query query = new Query("demand");
+        query.equalTo("close_demand",false);
         query.findDocuments(new CallbackFindDocument(){
 
             @Override
@@ -96,7 +97,7 @@ public class NewDemandFragment extends Fragment {
                                 (Boolean) documentInfos.get(i).get("close_demand")));
 
                     }
-                    DemandAdapter adapter = new DemandAdapter(mDemandData);
+                    DemandAdapter adapter = new DemandAdapter(mDemandData,mItemListener);
                     mRecyclerView.setAdapter(adapter);
                 }
             }
@@ -108,6 +109,13 @@ public class NewDemandFragment extends Fragment {
         });
 
     }
+
+    private DemandAdapter.CustomClickListener mItemListener = new DemandAdapter.CustomClickListener() {
+        @Override
+        public void onUserItemClickListener(int adapterPosition) {
+            Log.d(ConstantManager.TAG_PREFIX,"Items position "+adapterPosition);
+        }
+    };
 
 
 }

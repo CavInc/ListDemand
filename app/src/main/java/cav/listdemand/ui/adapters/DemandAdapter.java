@@ -20,8 +20,11 @@ public class DemandAdapter extends  RecyclerView.Adapter<DemandAdapter.DemandVie
     private Context mContext;
     private List<DemandModel> mData;
 
-    public DemandAdapter(List<DemandModel> data){
+    private DemandAdapter.CustomClickListener mClickListener;
+
+    public DemandAdapter(List<DemandModel> data,DemandAdapter.CustomClickListener customClickListener){
         this.mData= data;
+        mClickListener = customClickListener;
 
     }
 
@@ -29,7 +32,7 @@ public class DemandAdapter extends  RecyclerView.Adapter<DemandAdapter.DemandVie
     public DemandViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View contentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item,parent,false);
-        return new DemandViewHolder(contentView);
+        return new DemandViewHolder(contentView,mClickListener);
     }
 
     @Override
@@ -50,14 +53,29 @@ public class DemandAdapter extends  RecyclerView.Adapter<DemandAdapter.DemandVie
         return 0;
     }
 
-    public static class DemandViewHolder extends RecyclerView.ViewHolder  {
+    public static class DemandViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected TextView mTitle,mContent;
+        CustomClickListener mListener;
 
-        public DemandViewHolder(View itemView) {
+        public DemandViewHolder(View itemView,CustomClickListener customClickListener) {
             super(itemView);
             mTitle = (TextView) itemView.findViewById(R.id.title_demand);
             mContent = (TextView) itemView.findViewById(R.id.content_demand);
+            this.mListener = customClickListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (mListener!=null) {
+                mListener.onUserItemClickListener(getAdapterPosition());
+            }
+        }
+    }
+
+    public interface CustomClickListener {
+        void onUserItemClickListener(int adapterPosition) ;
+
     }
 
 }

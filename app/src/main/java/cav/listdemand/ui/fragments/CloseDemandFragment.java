@@ -88,7 +88,7 @@ public class CloseDemandFragment extends Fragment {
                                 (Boolean) documentInfos.get(i).get("close_demand")));
 
                     }
-                    DemandAdapter adapter = new DemandAdapter(mDemandData);
+                    DemandAdapter adapter = new DemandAdapter(mDemandData,mItemListener);
                     mRecyclerView.setAdapter(adapter);
                 }
             }
@@ -100,5 +100,12 @@ public class CloseDemandFragment extends Fragment {
         });
 
     }
+
+    private DemandAdapter.CustomClickListener mItemListener = new DemandAdapter.CustomClickListener() {
+        @Override
+        public void onUserItemClickListener(int adapterPosition) {
+            Log.d(ConstantManager.TAG_PREFIX,"Items position "+adapterPosition);
+        }
+    };
 
 }
