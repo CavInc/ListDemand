@@ -1,5 +1,6 @@
 package cav.listdemand.ui.fragments;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import java.util.List;
 import cav.listdemand.R;
 import cav.listdemand.data.network.QueryDemand;
 import cav.listdemand.data.storage.models.DemandModel;
+import cav.listdemand.data.storage.models.DemandModelParcel;
+import cav.listdemand.ui.ItemActivity;
 import cav.listdemand.ui.adapters.DemandAdapter;
 import cav.listdemand.utils.ConstantManager;
 import ru.profit_group.scorocode_sdk.Callbacks.CallbackFindDocument;
@@ -114,6 +117,14 @@ public class NewDemandFragment extends Fragment {
         @Override
         public void onUserItemClickListener(int adapterPosition) {
             Log.d(ConstantManager.TAG_PREFIX,"Items position "+adapterPosition);
+            DemandModel model = mDemandData.get(adapterPosition);
+            Log.d(ConstantManager.TAG_PREFIX,model.getId()+" "+model.getTitle());
+
+            Intent intent = new Intent(getActivity().getBaseContext(), ItemActivity.class);
+            intent.putExtra(ConstantManager.ITEM_ACTIVITY_FLG,ConstantManager.NEW);
+            intent.putExtra(ConstantManager.ITEM_DATA,new DemandModelParcel(model));
+
+            startActivity(intent);
         }
     };
 

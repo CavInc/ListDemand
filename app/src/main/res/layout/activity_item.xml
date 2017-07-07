@@ -28,6 +28,12 @@
         android:inputType="textMultiLine"
         android:layout_below="@id/item_string_1"
         android:gravity="top"/>
+    <EditText
+        android:id="@+id/item_comment"
+        android:layout_below="@id/item_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"/>
 
     <Button
         android:id="@+id/item_button_ok"
