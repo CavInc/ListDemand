@@ -25,6 +25,7 @@
         android:id="@+id/item_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_spasing_8"
         android:inputType="textMultiLine"
         android:layout_below="@id/item_string_1"
         android:gravity="top"/>
@@ -33,13 +34,30 @@
         android:layout_below="@id/item_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"/>
-
-    <Button
-        android:id="@+id/item_button_ok"
-        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:layout_above="@+id/button_layout"/>
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/item_button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/item_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
 
 
 </RelativeLayout>
