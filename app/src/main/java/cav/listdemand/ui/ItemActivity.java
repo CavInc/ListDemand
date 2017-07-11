@@ -72,7 +72,7 @@ public class ItemActivity extends AppCompatActivity {
         query.updateDocument(update, new CallbackUpdateDocument() {
             @Override
             public void onUpdateSucceed(ResponseUpdate responseUpdate) {
-
+                finish();
             }
 
             @SuppressLint("LongLogTag")
@@ -93,7 +93,6 @@ public class ItemActivity extends AppCompatActivity {
             if (mode == ConstantManager.NEW){
                 updateRec(sesionID,userID,model.getId(), String.valueOf(mComment.getText()));
             }
-            finish();
         }
     };
 }
